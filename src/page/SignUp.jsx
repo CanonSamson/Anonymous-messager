@@ -54,11 +54,6 @@ const SignUp = () => {
     }
 
 
-    useEffect(() => {
-        if (auth) {
-            navigate("/home")
-        }
-      },[])
 
     console.log(formData);
     return (

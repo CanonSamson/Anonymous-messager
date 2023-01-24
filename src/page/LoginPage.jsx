@@ -44,11 +44,6 @@ const LoginPage = () => {
   
     }
 
-    useEffect(() => {
-        if (auth) {
-            navigate("/")
-        }
-      },[])
 
     return (
            <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#cc50cf]">
@@ -82,14 +77,13 @@ const LoginPage = () => {
                                             placeholder="Enter Your PassWord"
                                         />
                                     </div>
-
-                                    <div className=" flex flex-col items-center py-4">
+                                </form>
+                                <div className=" flex flex-col items-center py-4">
                                             <button className=" bg-[#fb01ff] w-full  p-3 rounded-lg shadow-lg active:scale-105">Login</button>
                                             <Link className=" text-[#ef95f1] my-3" to=""> Forgot Password</Link>
                                             <Link to="/signup">Don't Have an Account? Register</Link>
                                     </div>
 
-                                </form>
                 </div>
 
            </section>
