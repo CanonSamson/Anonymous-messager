@@ -1,6 +1,32 @@
-import { Link } from "react-router-dom";
 
-const MyMessage = () => {
+import { db } from "../firebase-config"
+import { collection, getDocs } from "firebase/firestore"
+import { useUserAuth } from "../Auth";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+
+const MyMessage = ({ match }) => {
+    const { id } = useParams();
+    const [message, setMessage ] = useState([])
+
+    async function  getMessage() {
+
+        try {
+            const data = await getDocs(collection(db, "messages" ))
+            const user = (data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+            const userCurrentData = user.filter(user => user.uid === id);
+            console.log(userCurrentData)
+            setMessage(userCurrentData)
+
+        } catch (err) {
+            console.log(err)
+        }
+     }  
+   
+
+     useEffect(() => {
+        getMessage()
+     }, [])
     return (
            <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#cc50cf]">
 
@@ -8,11 +34,23 @@ const MyMessage = () => {
                         <h1 className=" text-3xl mt-10 text-center">My Answers</h1>
                         <p className=" text-xs  text-center">👇 Scroll 👇 down to check out the messages that you have received</p>
 
-                        <div className=" border my-10 border-red-400 rounded-lg p-5">
-                                <p>Oops! 😅 No one has sent you a message in last 3 Days! Share your profile link and check back later again!</p>
-                        </div>
+                       {
+                    <div className=" border my-10 border-red-400 rounded-lg p-5">
+                            <p>Oops! 😅 No one has sent you a message in last 3 Days! Share your profile link and check back later again!</p>
+                    </div>
+                    &&
+                        message.map((item) => (
+                            <div key={item.id} className=" border my-10 border-red-400 rounded-lg p-5">
+                                <p>{item.text}</p>
+                            </div>
+                        ))
+                       }
+
+
                         <div className=" flex flex-col items-center py-4">
-                            <button className=" bg-[#fb01ff] w-full  p-3 rounded-lg shadow-lg active:scale-105">Go Back</button>
+                            <Link className="w-full" to="/home" >
+                                <button className=" bg-[#fb01ff] w-full  p-3 rounded-lg shadow-lg active:scale-105">Go Back</button>
+                            </Link>
                         <div className=" mt-5">
                             <p className=" py-3">Kubool is an interactive Dare Game, where you can compliment and get complimented by your friends, family and closed ones keeping the privacy of the users safe.
                             One can only send you a private anonymous message in Kubool when he or she has your username. We recommend you share your unique profile link with everyone you love and care about. Not only them but you can also share the dare with everyone in your social media contact list and ask them to answer the dare. By doing this you will be able to know how people think about you in general. Ask your friends to join the platform and send their unique links too so that you can compliment them anonymously. Does not matter if you are shy to compliment someone or an introvert in general, you can always use the power of anonymity in front of everyone else on our platform and use it to send and receive anonymous compliments, and texts.

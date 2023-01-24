@@ -34,11 +34,15 @@ export function AuthProvider({ children }) {
             console.log(err)
         }
      }  
+
+   
    
 
     useEffect(() => {        
         auth.onAuthStateChanged((user) => {
+            console.log(user)
             getUser();
+
             setPending(false)
         });
 

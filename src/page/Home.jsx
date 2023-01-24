@@ -24,7 +24,7 @@ const Home = () => {
            
 
                         <div className=" border-t mt-10">
-                                <Link to="/" className=" flex flex-col items-center py-4">
+                                <Link to={`/mymessage/${user.id}`} className=" flex flex-col items-center py-4">
                                         <button className=" bg-[#fb01ff] w-full  p-3 rounded-lg shadow-lg active:scale-105">View Messages</button>
                                 </Link>
 
@@ -42,7 +42,7 @@ const Home = () => {
                                 </div>
                                 <div className=" flex justify-center items-center">
                                         <h1 className=" text-center my-2  text-3xl mt-10">Copy Link</h1>
-                                        <div onClick={handleCopyClick} className=" animate-ping">
+                                        <div onClick={handleCopyClick} className="">
                                                 <FiCopy size={50} />
                                         </div>
                                 </div>
