@@ -15,14 +15,13 @@ const Home = () => {
         };
         
     return (
-           <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#cc50cf]">
+           <section className=" min-h-screen w-full px-5 flex justify-center items-center  bg-[#cc50cf]">
 
-                <div className="  text-white shadow-xl  items-center  p-5 rounded-lg  bg-[#7d247f]">
+                <div className="  text-white shadow-xl    p-5 rounded-lg  bg-[#7d247f]">
                         <h1 className=" text-center my-2  text-3xl mt-10">{user.name} Profile</h1>
-                        <p  onClick={() => {setCopy(!copy)}} className="text-center mb-5">{link}</p>
+                        <p  onClick={() => {setCopy(!copy)}} className="text-center text-xs mb-5">{link}</p>
                         <p className=" text-xs text-center">Share your profile link ❤️ to get responses from your friend. Go to "View Messages" to check out the responses. 👌</p>
-
-                              
+           
 
                         <div className=" border-t mt-10">
                                 <Link to="/" className=" flex flex-col items-center py-4">
@@ -36,7 +35,7 @@ const Home = () => {
 
                 </div>
 
-                <div className={` ${ copy ? " top-0 right-0 w-full h-screen transition-all duration-150" : " overflow-hidden w-0 h-0 transition-all duration-150 "}  bg-[#7d247f]/50 text-white   fixed  flex justify-center items-center`}>
+                <div className={` ${ copy ? " top-0 right-0 w-full h-screen transition-all duration-150" : " overflow-hidden w-[0px] h-[0px] transition-all duration-150 "}  bg-[#7d247f]/50 text-white   fixed  flex justify-center items-center`}>
                         <div className="  p-5 m-5 rounded-lg bg-[#fb01ff] ">
                                 <div onClick={() => {setCopy(!copy)}} className=" absolute p-3 rounded-full z-20 bg-[#7d247f]/50 top-[10px]  right-[10px] ">
                                         <FiCheckCircle/ >

@@ -101,7 +101,7 @@ const SignUp = () => {
                                     </div>
 
                                 <div className=" flex flex-col items-center py-4">
-                                        <button className=" bg-[#fb01ff] w-full  p-3 rounded-lg shadow-lg active:scale-105">Risgister </button>
+                                        <button className=" bg-[#fb01ff] w-full  p-3 rounded-lg shadow-lg active:scale-105">Register </button>
                                         <Link className=" text-[#ef95f1] my-3" to="/">Already Have an Account? Login</Link>
                                         <Link className=" text-xs text-center">By using this service, you agree to our Privacy Policy, Terms of Service and any related policies. (Check Disclaimer)</Link>
                                 </div>
