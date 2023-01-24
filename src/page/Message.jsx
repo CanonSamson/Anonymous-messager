@@ -56,7 +56,7 @@ const Messsage = ({ match }) => {
           getUser();
     }, []);
     return (
-           <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#cc50cf]">
+           <section className="  p-5 min-h-screen justify-center flex items-center  bg-[#cc50cf]">
 
                 <div className="  text-white shadow-xl  items-center  p-5 rounded-lg  bg-[#7d247f]">
                                 <h1 className=" text-3xl mt-10 text-center">Say Something..</h1>
