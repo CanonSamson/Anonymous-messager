@@ -41,7 +41,7 @@ const SignUp = () => {
             })
 
             const formDataCopy = { ...formData }
-            delete formDataCopy.password
+            // delete formDataCopy.password
             await setDoc(doc(db, "users", user.uid), formDataCopy);
 
             setSubmit(submit)

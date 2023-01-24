@@ -1,18 +1,75 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react'
+import { doc} from "firebase/firestore";
+import { db } from "../firebase-config"
+import {  getDoc, setDoc } from "firebase/firestore"
 
-const Messsage = () => {
+
+const Messsage = ({ match }) => {
+    const { id } = useParams();
+
+    const navigate = useNavigate()
+
+    const [message, setMessage] = useState({
+        text : "",
+        uid: id,
+    })
+
+    const { text } = message;
+    
+    const onChange = (e) => {
+        setMessage((prevState) => ({
+            ...prevState,
+            [e.target.id]: e.target.value
+        }));
+        console.log(message)
+    }
+
+
+    async function  getUser() {
+        try {
+            const docRef = doc(db, "users", id);
+            const user = await getDoc(docRef);
+            console.log( user)
+    
+        } catch (err) {
+            console.log(err)
+        }
+     }  
+
+
+     const onSubmit = async (e) => {
+        e.preventDefault()
+
+        try {
+            
+            await setDoc(doc(db, "messages", crypto.randomUUID() ), message );
+            navigate("/home")
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+
+    }
+
+     useEffect(() => {        
+          getUser();
+    }, []);
     return (
            <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#cc50cf]">
 
                 <div className="  text-white shadow-xl  items-center  p-5 rounded-lg  bg-[#7d247f]">
                                 <h1 className=" text-3xl mt-10 text-center">Say Something..</h1>
 
-                                <form action=" " className=" my-5">
+                                <form onSubmit={onSubmit} className=" my-5">
                                     <div className="  my-5 items-start justify-start flex flex-col">
                                         <label className=" mb-2" >Say Something About Me <span className=" text-red-600">*</span></label>
                                         <input 
+                                            onChange={onChange}
                                             className=" p-3 focus:outline-none w-full  bg-[#5d185e] rounded-lg"
                                             type="text"
+                                            value={text} 
+                                            id="text"
                                             placeholder="Leave a message for canon_gss"
                                         />
                                         <div className=" my-3 border-b border-gray-100/50 w-full py-2 mt-10">

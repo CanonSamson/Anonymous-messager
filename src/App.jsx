@@ -8,8 +8,10 @@ import Messsage from './page/Message'
 import MyMessage from './page/MyMessage'
 import { AuthProvider } from './Auth'
 
-function App() {
 
+function App() {
+  
+ 
   return (
    <AuthProvider>
       <BrowserRouter >
@@ -18,9 +20,9 @@ function App() {
           <Route path='/signup' element={<SignUp /> } />
           <Route path='/' element={<PrivateRoute />}  >
             <Route path='home' element={<Home /> } />
-            <Route path='message' element={<Messsage /> } />
             <Route path='mymessage' element={<MyMessage /> } />       
           </Route>
+          <Route path='message/:id' element={<Messsage /> } />
 
         </Routes>
       </BrowserRouter>
