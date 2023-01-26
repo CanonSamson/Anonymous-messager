@@ -8,6 +8,7 @@ import Messsage from './page/Message'
 import MyMessage from './page/MyMessage'
 import { AuthProvider } from './Auth'
 import NotFund from './page/NotFund'
+import ScrollToTop from './ScrollToTop'
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
   return (
    <AuthProvider>
       <BrowserRouter >
+        <ScrollToTop />
         <Routes>
           <Route path='/' element={<LoginPage /> } />
           <Route path='/signup' element={<SignUp /> } />
