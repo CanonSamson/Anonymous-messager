@@ -25,8 +25,8 @@ function App() {
             <Route path='home' element={<Home /> } />
             <Route path='mymessage/:id' element={<MyMessage /> } />       
           </Route>
-          <Route path='/message/:id' element={<Messsage /> } />
-          <Route path='*' element={<NotFund />} />
+          {/* <Route path='/message/:id' element={<Messsage /> } /> */}
+          {/* <Route path='*' element={<NotFund />} /> */}
 
         </Routes>
       </BrowserRouter>
