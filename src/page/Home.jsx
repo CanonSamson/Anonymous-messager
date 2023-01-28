@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
         const user = useUserAuth();
         const [copy, setCopy] = useState(false);
-        const link = `https://mestid.netlify.app/message/${user.name}`
+        const link = `https://mestid.netlify.app/${user.name}`
 
         const handleCopyClick = () => {
                 navigator.clipboard.writeText(link);
@@ -46,7 +46,7 @@ const Home = () => {
                                                 </div>
                                         </div>
 
-                                        <p className="text-center mb-5  bg-[#fb01ff]">https://mestid.netlify.app/message/{` ${user.name}`} </p>
+                                        <p className="text-center mb-5  bg-[#fb01ff]">https://mestid.netlify.app/{` ${user.name}`} </p>
 
                                 </div>
                         </div>
