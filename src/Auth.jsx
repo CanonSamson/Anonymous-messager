@@ -20,7 +20,7 @@ export function AuthProvider({ children }) {
 
     const auth = getAuth();
 
-    async function  getUser() {
+    async function getUser() {
         let uid = auth.currentUser.uid
 
         try {
@@ -33,12 +33,12 @@ export function AuthProvider({ children }) {
         } catch (err) {
             console.log(err)
         }
-     }  
+    }
 
-   
-   
 
-    useEffect(() => {        
+
+
+    useEffect(() => {
         auth.onAuthStateChanged((user) => {
             console.log(user)
             getUser();
@@ -59,7 +59,7 @@ export function AuthProvider({ children }) {
 
     return (
         <AuthContext.Provider value={userDetail}>
-                {children}
+            {children}
         </AuthContext.Provider>
     )
 }
