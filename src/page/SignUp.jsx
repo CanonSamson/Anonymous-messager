@@ -60,7 +60,7 @@ const SignUp = () => {
            <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#cc50cf]">
 
                 <div className="  text-white shadow-xl  items-center  p-5 rounded-lg  bg-[#7d247f]">
-                                <img className=" flex justify-center items-center w-[40%] m-auto" src="https://gdpd.xyz/kimages/logo-icon.png" alt="" />
+                                {/* <img className=" flex justify-center items-center w-[40%] m-auto" src="https://gdpd.xyz/kimages/logo-icon.png" alt="" /> */}
                                 <h1 className=" text-3xl mt-10">Register</h1>
 
                                 <form onSubmit={onSubmit} className=" my-5">
@@ -94,8 +94,8 @@ const SignUp = () => {
                                             onChange={onChange}
                                             value={password}
                                             id="password"
-                                            className=" p-3 w-full bg-transparent border-b "
-                                            type="text"
+                                            className=" p-3 w-full bg-transparent focus:outline-none border-b "
+                                            type="password"
                                             placeholder="Enter Your PassWord"
                                         />
                                     </div>

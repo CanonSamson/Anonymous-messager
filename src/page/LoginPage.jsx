@@ -33,7 +33,6 @@ const LoginPage = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password)
 
-      setSubmit(false)
       if (userCredential.user) {
         navigate("/home")
       }
@@ -49,7 +48,7 @@ const LoginPage = () => {
     <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#cc50cf]">
 
       <div className="  text-white shadow-xl  items-center  p-5 rounded-lg  bg-[#7d247f]">
-        <img className=" flex justify-center items-center w-[40%] m-auto" src="https://gdpd.xyz/kimages/logo-icon.png" alt="" />
+        {/* <img className=" flex justify-center items-center w-[40%] m-auto" src="https://gdpd.xyz/kimages/logo-icon.png" alt="" /> */}
         <h1 className=" text-3xl mt-10">Login</h1>
         <p className=" text-xs">Recieve anonymous compliments from your friends and send anonymous messages to your friends for free.</p>
 
@@ -57,6 +56,7 @@ const LoginPage = () => {
           <div className="  my-5 items-start justify-start flex flex-col">
             <label className=" mb-2" >Your Email</label>
             <input
+              required
               className=" p-3 focus:outline-none w-full bg-transparent border-b "
               type="text"
               value={email}
@@ -69,8 +69,9 @@ const LoginPage = () => {
           <div className="  my-5 items-start justify-start flex flex-col">
             <label >Password</label>
             <input
-              className=" p-3 w-full bg-transparent border-b "
-              type="text"
+              required
+              className=" p-3 w-full focus:outline-none bg-transparent border-b "
+              type="password"
               onChange={onChange}
               id="password"
               value={password}

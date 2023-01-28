@@ -28,7 +28,7 @@ export function AuthProvider({ children }) {
             const user = (data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
             const userCurrentData = user.find(user => user.id === uid);
             setUserDetail(userCurrentData)
-            console.log(userCurrentData)
+            // console.log(userCurrentData)
 
         } catch (err) {
             console.log(err)
@@ -40,7 +40,7 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
-            console.log(user)
+            // console.log(user)
             getUser();
 
             setPending(false)
