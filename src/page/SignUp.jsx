@@ -69,6 +69,7 @@ const SignUp = () => {
                 <div className="  text-white shadow-xl  items-center  p-5 rounded-lg  bg-[#7821CE]">
                     {/* <img className=" flex justify-center items-center w-[40%] m-auto" src="https://gdpd.xyz/kimages/logo-icon.png" alt="" /> */}
                     <h1 className=" text-3xl mt-10">Register</h1>
+                    <p className=" text-xs">Recieve anonymous compliments from your friends and send anonymous messages to your friends for free.</p>
 
                     <form onSubmit={onSubmit} className=" my-5">
                         <div className="  my-5 items-start justify-start flex flex-col">

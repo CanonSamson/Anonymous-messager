@@ -8,9 +8,9 @@ const Home = () => {
         const user = useUserAuth();
         const [copy, setCopy] = useState(false);
         const link = `https://mestid.netlify.app/${user.name}`
-
+        const linkText = `Write a *secret anonymous message* for me.. 😉 I *won't know* who wrote it.. 😂❤ 👉 ${link}`
         const handleCopyClick = () => {
-                navigator.clipboard.writeText(link);
+                navigator.clipboard.writeText(linkText);
                 setCopy(!copy)
         };
 
@@ -27,9 +27,13 @@ const Home = () => {
                                                 <button className=" bg-[#fb01ff] w-full  p-3 rounded-lg shadow-lg active:scale-105">View Messages</button>
                                         </Link>
 
-                                        <div onClick={() => { setCopy(!copy) }} className=" flex flex-col items-center py-4">
+
+                                        <a
+                                                className=" flex flex-col items-center py-4"
+                                                href={`whatsapp://send?text=${linkText}`}
+                                                data-action="share/whatsapp/share">
                                                 <button className=" bg-[#4ba29b] w-full  p-3 rounded-lg shadow-lg active:scale-105">Share on WhatsApp</button>
-                                        </div>
+                                        </a>
                                 </div>
 
                         </div>
