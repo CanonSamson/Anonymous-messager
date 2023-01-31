@@ -45,9 +45,9 @@ const LoginPage = () => {
 
 
   return (
-    <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#cc50cf]">
+    <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#DDC7F3]">
 
-      <div className="  text-white shadow-xl  items-center  p-5 rounded-lg  bg-[#7d247f]">
+      <div className="  text-white shadow-xl  items-center  p-5 rounded-lg  bg-[#7821CE]">
         {/* <img className=" flex justify-center items-center w-[40%] m-auto" src="https://gdpd.xyz/kimages/logo-icon.png" alt="" /> */}
         <h1 className=" text-3xl mt-10">Login</h1>
         <p className=" text-xs">Recieve anonymous compliments from your friends and send anonymous messages to your friends for free.</p>

@@ -64,9 +64,9 @@ const SignUp = () => {
                 <meta property="og:image:type" content="image/jpeg" />
                 <meta name="description" content="Experience the thrill of anonymous communication with friends. Send and receive compliments without revealing your identity. Sign up now for a free and fun way to connect with your friends anonymously." />
             </Helmet>
-            <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#cc50cf]">
+            <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#DDC7F3]">
 
-                <div className="  text-white shadow-xl  items-center  p-5 rounded-lg  bg-[#7d247f]">
+                <div className="  text-white shadow-xl  items-center  p-5 rounded-lg  bg-[#7821CE]">
                     {/* <img className=" flex justify-center items-center w-[40%] m-auto" src="https://gdpd.xyz/kimages/logo-icon.png" alt="" /> */}
                     <h1 className=" text-3xl mt-10">Register</h1>
 
