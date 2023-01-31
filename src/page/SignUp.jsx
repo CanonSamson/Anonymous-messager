@@ -62,6 +62,7 @@ const SignUp = () => {
             <Helmet>
                 <meta property="og:image" content="../assets/cover.jpg" />
                 <meta property="og:image:type" content="image/jpeg" />
+                <meta name="description" content="Experience the thrill of anonymous communication with friends. Send and receive compliments without revealing your identity. Sign up now for a free and fun way to connect with your friends anonymously." />
             </Helmet>
             <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#cc50cf]">
 
