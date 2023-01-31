@@ -3,7 +3,8 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { getAuth } from "firebase/auth";
 import { db } from "./firebase-config"
 import { collection, getDocs } from "firebase/firestore"
-
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -15,10 +16,14 @@ export function useUserAuth() {
 
 
 export function AuthProvider({ children }) {
+    const navigate = useNavigate()
     const [pending, setPending] = useState(true)
     const [userDetail, setUserDetail] = useState([])
 
+    const [userD, setUserD] = useState(null)
+
     const auth = getAuth();
+
 
     async function getUser() {
         let uid = auth.currentUser.uid
@@ -35,12 +40,17 @@ export function AuthProvider({ children }) {
         }
     }
 
+    function logout() {
+        signOut(auth);
+        navigate("/")
+    }
 
 
 
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
-            // console.log(user)
+            setUserD(user)
+            console.log(user)
             getUser();
 
             setPending(false)
@@ -48,6 +58,7 @@ export function AuthProvider({ children }) {
 
 
     }, []);
+
 
     if (pending) {
         return (
@@ -57,8 +68,14 @@ export function AuthProvider({ children }) {
         )
     }
 
+    const value = {
+        userDetail,
+        userD,
+        logout
+
+    }
     return (
-        <AuthContext.Provider value={userDetail}>
+        <AuthContext.Provider value={value}>
             {children}
         </AuthContext.Provider>
     )

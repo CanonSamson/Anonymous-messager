@@ -11,7 +11,6 @@ const Messsage = ({ match }) => {
 
     const navigate = useNavigate()
 
-    const [user, setUser] = useState([])
     const [message, setMessage] = useState({
         text: "",
         uid: id,

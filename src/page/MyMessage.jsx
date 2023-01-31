@@ -8,14 +8,14 @@ import { Link, useParams } from "react-router-dom";
 const MyMessage = ({ match }) => {
     const { id } = useParams();
     const [message, setMessage] = useState([])
-    const use = useUserAuth();
+    const { userDetail } = useUserAuth();
 
     async function getMessage() {
 
         try {
             const data = await getDocs(collection(db, "messages"))
             const user = (data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-            const userCurrentData = user.filter(user => user.uid === use.name);
+            const userCurrentData = user.filter(user => user.uid === userDetail.name);
             console.log(userCurrentData)
             setMessage(userCurrentData)
 

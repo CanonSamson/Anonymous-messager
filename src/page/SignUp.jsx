@@ -8,7 +8,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
     const [submit, setSubmit] = useState(false)
-    const [data, setData] = useState({})
     const navigate = useNavigate()
 
     const [formData, setformData] = useState({
@@ -75,6 +74,7 @@ const SignUp = () => {
                         <div className="  my-5 items-start justify-start flex flex-col">
                             <label className=" mb-2" >Your UserName</label>
                             <input
+                                required={true}
                                 onChange={onChange}
                                 id="name"
                                 value={name}
@@ -87,6 +87,7 @@ const SignUp = () => {
                         <div className="  my-5 items-start justify-start flex flex-col">
                             <label className=" mb-2" >Your E-Mail</label>
                             <input
+                                required={true}
                                 onChange={onChange}
                                 value={email}
                                 id="email"
@@ -99,6 +100,7 @@ const SignUp = () => {
                         <div className="  my-5 items-start justify-start flex flex-col">
                             <label >Password</label>
                             <input
+                                required={true}
                                 onChange={onChange}
                                 value={password}
                                 id="password"
@@ -109,7 +111,7 @@ const SignUp = () => {
                         </div>
 
                         <div className=" flex flex-col items-center py-4">
-                            <button className=" bg-[#fb01ff] w-full  p-3 rounded-lg shadow-lg active:scale-105">Register </button>
+                            <button className=" bg-[#fb01ff] w-full  p-3 rounded-lg shadow-lg active:scale-105"> { submit ? <p className="w-5 border-4 border-dotted border-white border-r-0 animate-spin duration-150 transition-all  relative h-5 rounded-full"></p> : `Register`} </button>
                             <Link className=" text-[#ef95f1] my-3" to="/">Already Have an Account? Login</Link>
                             <Link className=" text-xs text-center">By using this service, you agree to our Privacy Policy, Terms of Service and any related policies. (Check Disclaimer)</Link>
                         </div>

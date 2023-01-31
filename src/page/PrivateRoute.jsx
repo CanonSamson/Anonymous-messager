@@ -4,9 +4,9 @@ import { useUserAuth } from "../Auth";
 
 const PrivateRoute = () => {
 
-    const currentUser = useUserAuth()
+    const { userD } = useUserAuth()
 
-    return currentUser ? <Outlet /> : <Navigate to="/" />
+    return userD ? <Outlet /> : <Navigate to="/" />
 
 }
 

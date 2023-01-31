@@ -27,8 +27,9 @@ const LoginPage = () => {
 
   const auth = getAuth();
   const onSubmit = async (e) => {
-    setSubmit(!submit)
+     setSubmit(!submit)
     e.preventDefault()
+  
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password)
@@ -56,7 +57,7 @@ const LoginPage = () => {
           <div className="  my-5 items-start justify-start flex flex-col">
             <label className=" mb-2" >Your Email</label>
             <input
-              required
+              required={true}
               className=" p-3 focus:outline-none w-full bg-transparent border-b "
               type="text"
               value={email}
@@ -69,7 +70,7 @@ const LoginPage = () => {
           <div className="  my-5 items-start justify-start flex flex-col">
             <label >Password</label>
             <input
-              required
+              required={true}
               className=" p-3 w-full focus:outline-none bg-transparent border-b "
               type="password"
               onChange={onChange}
@@ -80,7 +81,7 @@ const LoginPage = () => {
           </div>
         </form>
         <div className=" flex flex-col items-center py-4">
-          <button className=" bg-[#fb01ff] w-full  p-3 rounded-lg shadow-lg active:scale-105">Login</button>
+          <button className=" bg-[#fb01ff] w-full  p-3 rounded-lg shadow-lg active:scale-105"> { submit ? <p className="w-5 border-4 border-dotted border-white border-r-0 animate-spin duration-150 transition-all  relative h-5 rounded-full"></p> : `Login`} </button>
           <Link className=" text-[#ef95f1] my-3" to=""> Forgot Password</Link>
           <Link to="/signup">Don't Have an Account? Register</Link>
         </div>

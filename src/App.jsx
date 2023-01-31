@@ -15,8 +15,9 @@ function App() {
 
 
   return (
-    <AuthProvider>
-      <BrowserRouter >
+
+    <BrowserRouter >
+      <AuthProvider>
         <ScrollToTop />
         <Routes>
           <Route path='/' element={<LoginPage />} />
@@ -29,8 +30,8 @@ function App() {
           <Route path='*' element={<NotFund />} />
 
         </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+      </AuthProvider>
+    </BrowserRouter>
 
   )
 }
