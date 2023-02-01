@@ -44,12 +44,12 @@ const LoginPage = () => {
       console.log(error.message)
 
       if (error.message === `Firebase: Error (auth/user-not-found).`) {
-        setErrorM("Sorry this user is not resgister")
+        setErrorM("Sorry this user is not register")
 
       } 
 
       if (error.message === `Firebase: Error (auth/wrong-password).`) {
-        setErrorM('Your Password is Incorrect')
+        setErrorM('Your Password is ')
       }
 
       if (error.message === `Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).`) {

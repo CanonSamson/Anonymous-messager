@@ -1,0 +1,9 @@
+
+
+.pre {
+    display: none;
+}
+
+input:invalid[focused ="true"] ~ .pre{
+    display: block;
+}

@@ -7,8 +7,15 @@ import { setDoc, doc } from "firebase/firestore"
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../Auth";
 
+
 const SignUp = () => {
     const [submit, setSubmit] = useState(false)
+    const [errorM, setErrorM] = useState('')
+    const [focused, setFocused] = useState(false)
+    const handlef = () => {
+        setFocused(true)
+    }
+
     const navigate = useNavigate()
 
     const [formData, setformData] = useState({
@@ -48,8 +55,22 @@ const SignUp = () => {
 
             setSubmit(submit)
             navigate("/home")
-        } catch (e) {
-            console.error("Error adding document: ", e);
+        } catch (error) {
+            console.log(error.message)
+
+            if (error.message === `Firebase: Error (auth/email-already-in-use).`) {
+                setErrorM("Email address already in use")
+
+            }
+
+            if (error.message === `Firebase: Error (auth/invalid-email).`) {
+                setErrorM("Enter a valid Email address")
+
+            }
+            if (error.message === `Firebase: Password should be at least 6 characters (auth/weak-password).`) {
+                setErrorM("Password should be at least 6 characters ")
+
+            }
             setSubmit(submit)
         }
 
@@ -76,19 +97,29 @@ const SignUp = () => {
                         <div className="  my-5 items-start justify-start flex flex-col">
                             <label className=" mb-2" >Your UserName</label>
                             <input
+                                autocapitalize="off"
+                                autocorrect="off"
+                                maxlength="30"
                                 required={true}
                                 onChange={onChange}
+                                pattern="^\S{3,}$"
                                 id="name"
                                 value={name}
-                                className=" p-3 focus:outline-none w-full bg-transparent border-b "
+                                className=" p-3 input focus:outline-none w-full bg-transparent border-b "
                                 type="text"
+                                onBlur={handlef} 
+                                focused={focused.toString()}
                                 placeholder="Enter Your Username"
                             />
+                            <p className=" text-xs mt-2 pre"> Ensure UserName does not contain spaces and has a minimum length of 3 characters</p>
                         </div>
+                        
 
                         <div className="  my-5 items-start justify-start flex flex-col">
                             <label className=" mb-2" >Your E-Mail</label>
                             <input
+                                autocapitalize="off"
+                                autocorrect="off"
                                 required={true}
                                 onChange={onChange}
                                 value={email}
@@ -102,6 +133,9 @@ const SignUp = () => {
                         <div className="  my-5 items-start justify-start flex flex-col">
                             <label >Password</label>
                             <input
+                                autocapitalize="off"
+                                autocorrect="off"
+                                autocomplete="new-password"
                                 required={true}
                                 onChange={onChange}
                                 value={password}
@@ -111,9 +145,10 @@ const SignUp = () => {
                                 placeholder="Enter Your PassWord"
                             />
                         </div>
+                        <p className=" ">{errorM}</p>
 
                         <div className=" flex flex-col items-center py-4">
-                            <button className=" bg-[#fb01ff] w-full  p-3 rounded-lg shadow-lg active:scale-105"> { submit ? <p className="w-5 border-4 border-dotted border-white border-r-0 animate-spin duration-150 transition-all  relative h-5 rounded-full"></p> : `Register`} </button>
+                            <button className=" bg-[#fb01ff] w-full  p-3 rounded-lg shadow-lg active:scale-105"> {submit ? <p className="w-5 border-4 border-dotted m-auto flex justify-center items-center border-white border-r-0 animate-spin duration-150 transition-all  relative h-5 rounded-full"></p> : `Register`} </button>
                             <Link className=" text-[#ef95f1] my-3" to="/">Already Have an Account? Login</Link>
                             <Link className=" text-xs text-center">By using this service, you agree to our Privacy Policy, Terms of Service and any related policies. (Check Disclaimer)</Link>
                         </div>
