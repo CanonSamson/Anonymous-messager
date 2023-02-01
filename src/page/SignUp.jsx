@@ -4,7 +4,8 @@ import { Helmet } from 'react-helmet';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { db } from "../firebase-config"
 import { setDoc, doc } from "firebase/firestore"
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useUserAuth } from "../Auth";
 
 const SignUp = () => {
     const [submit, setSubmit] = useState(false)
@@ -17,7 +18,8 @@ const SignUp = () => {
 
     const { name, email, password, } = formData
 
-    const auth = getAuth();
+
+    const { auth } = useUserAuth();
 
     const onChange = (e) => {
         setformData((prevState) => ({
@@ -56,7 +58,7 @@ const SignUp = () => {
 
 
     console.log(formData);
-    return (
+    return auth ?
         <>
             <Helmet>
                 <meta property="og:image" content="../assets/cover.jpg" />
@@ -119,8 +121,9 @@ const SignUp = () => {
                 </div>
 
             </section>
-        </>
-    );
+        </> :
+        <Navigate to="/home" />
+
 }
 
 export default SignUp;

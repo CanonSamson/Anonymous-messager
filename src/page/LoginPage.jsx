@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useUserAuth } from "../Auth";
 
 const LoginPage = () => {
 
   const [submit, setSubmit] = useState(false)
+  const [errorM, setErrorM] = useState('')
 
   const navigate = useNavigate()
 
@@ -25,11 +27,11 @@ const LoginPage = () => {
     }))
   }
 
-  const auth = getAuth();
+  const { auth } = useUserAuth();
+
   const onSubmit = async (e) => {
-     setSubmit(!submit)
+    setSubmit(!submit)
     e.preventDefault()
-  
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password)
@@ -39,10 +41,24 @@ const LoginPage = () => {
       }
     } catch (error) {
       setSubmit(false)
-      console.log(error)
+      console.log(error.message)
+
+      if (error.message === `Firebase: Error (auth/user-not-found).`) {
+        setErrorM("Sorry this user is not resgister")
+
+      } 
+
+      if (error.message === `Firebase: Error (auth/wrong-password).`) {
+        setErrorM('Your Password is Incorrect')
+      }
+
+      if (error.message === `Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).`) {
+        setErrorM('Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.')
+      }
     }
 
   }
+  console.log(errorM)
 
 
   return (
@@ -79,12 +95,15 @@ const LoginPage = () => {
               placeholder="Enter Your PassWord"
             />
           </div>
+          <div className=" border-b-red-400 border-b pb-2">
+          <p className=" ">{errorM}</p>
+          </div>
+          <div className=" flex flex-col items-center py-4">
+            <button className=" bg-[#fb01ff] w-full  p-3 rounded-lg shadow-lg active:scale-105"> {submit ? <p className="w-5 m flex justify-center items-center m-auto border-4 border-dotted border-white border-r-0 animate-spin duration-150 transition-all  relative h-5 rounded-full"></p> : `Login`} </button>
+            <Link className=" text-[#ef95f1] my-3" to=""> Forgot Password</Link>
+            <Link to="/signup">Don't Have an Account? Register</Link>
+          </div>
         </form>
-        <div className=" flex flex-col items-center py-4">
-          <button className=" bg-[#fb01ff] w-full  p-3 rounded-lg shadow-lg active:scale-105"> { submit ? <p className="w-5 border-4 border-dotted border-white border-r-0 animate-spin duration-150 transition-all  relative h-5 rounded-full"></p> : `Login`} </button>
-          <Link className=" text-[#ef95f1] my-3" to=""> Forgot Password</Link>
-          <Link to="/signup">Don't Have an Account? Register</Link>
-        </div>
 
       </div>
 
