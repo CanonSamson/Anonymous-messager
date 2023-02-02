@@ -19,8 +19,6 @@ const Home = () => {
                 alert(Copied)
         };
 
-
-
         return (
                 <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#DDC7F3]">
 

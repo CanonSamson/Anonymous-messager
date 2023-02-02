@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Helmet } from 'react-helmet';
 
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { db } from "../firebase-config"
-import { setDoc, doc, serverTimestamp } from "firebase/firestore"
+import { setDoc, doc, serverTimestamp, collection, getDocs } from "firebase/firestore"
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../Auth";
 
@@ -12,6 +14,7 @@ const SignUp = () => {
     const [submit, setSubmit] = useState(false)
     const [errorM, setErrorM] = useState('')
     const [focused, setFocused] = useState(false)
+    const [showPassword, setShowPassword] = useState(true)
 
 
 
@@ -41,20 +44,29 @@ const SignUp = () => {
         e.preventDefault()
 
         try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password)
-            // Signed in 
-            const user = userCredential.user;
-            // ...
-            updateProfile(auth.currentUser, {
-                displayName: name
-            })
+            const data = await getDocs(collection(db, "users"))
+            const users = (data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+            const userCurrentData = users.find(user => user.name === name)
 
-            const formDataCopy = { ...formData }
-            // delete formDataCopy.password
-            await setDoc(doc(db, "users", user.uid), formDataCopy);
+            if (userCurrentData) {
+                setErrorM("Username is already in use ")
+            } else {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+                // Signed in 
+                const user = userCredential.user;
+                // ...
+                updateProfile(auth.currentUser, {
+                    displayName: name
+                })
 
+                const formDataCopy = { ...formData }
+                // delete formDataCopy.password
+                await setDoc(doc(db, "users", user.uid), formDataCopy);
+
+
+                navigate("/home")
+            }
             setSubmit(submit)
-            navigate("/home")
         } catch (error) {
             console.log(error.message)
 
@@ -108,7 +120,7 @@ const SignUp = () => {
                                 pattern="^\S{3,}$"
                                 id="name"
                                 value={name}
-                                className=" p-3 input focus:outline-none w-full bg-transparent border-b "
+                                className=" p-3 input focus:outline-none  rounded shadow-lg bg-[#6115ac] focus:border-2 border-dotted border-[#a259eb] w-full  "
                                 type="text"
                                 onBlur={() => { setFocused(true) }}
                                 focused={focused.toString()}
@@ -127,7 +139,7 @@ const SignUp = () => {
                                 onChange={onChange}
                                 value={email}
                                 id="email"
-                                className=" p-3 focus:outline-none w-full bg-transparent border-b "
+                                className=" p-3 focus:outline-none w-full rounded shadow-lg bg-[#6115ac] focus:border-2 border-dotted border-[#a259eb] "
                                 type="text"
                                 placeholder="Enter Your Email here"
                             />
@@ -135,18 +147,22 @@ const SignUp = () => {
 
                         <div className="  my-5 items-start justify-start flex flex-col">
                             <label >Password</label>
-                            <input
-                                autoCapitalize="off"
-                                autoCorrect="off"
-                                autoComplete="new-password"
-                                required={true}
-                                onChange={onChange}
-                                value={password}
-                                id="password"
-                                className=" p-3 w-full bg-transparent focus:outline-none border-b "
-                                type="password"
-                                placeholder="Enter Your Password"
-                            />
+
+                            <div className=" flex items-center justify-between  bg-[#6115ac] rounded  border-2 border-dotted border-[#a259eb] shadow-lg w-full pr-5 ">
+                                <input
+                                    autoCapitalize="off"
+                                    autoCorrect="off"
+                                    autoComplete="new-password"
+                                    required={true}
+                                    onChange={onChange}
+                                    value={password}
+                                    id="password"
+                                    className=" p-3 flex-1   w-full bg-[#6115ac]  focus:outline-none "
+                                    type={ showPassword ?  "password": "text"}
+                                    placeholder="Enter Your Password" />
+                                {showPassword ? <div className=" text-[#B8B8B8]" onClick={() => setShowPassword(!showPassword)}><VisibilityOffIcon /> </div> :
+                                    <div className=" text-[#B8B8B8]" onClick={() => setShowPassword(!showPassword)}><VisibilityIcon /> </div>}
+                            </div>
                         </div>
                         <p className=" ">{errorM}</p>
 
