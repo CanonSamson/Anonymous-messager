@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { db } from "../firebase-config"
-import { setDoc, doc } from "firebase/firestore"
+import { setDoc, doc, serverTimestamp } from "firebase/firestore"
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../Auth";
 
@@ -12,18 +12,18 @@ const SignUp = () => {
     const [submit, setSubmit] = useState(false)
     const [errorM, setErrorM] = useState('')
     const [focused, setFocused] = useState(false)
-    const handlef = () => {
-        setFocused(true)
-    }
+
+
 
     const navigate = useNavigate()
 
     const [formData, setformData] = useState({
         name: "",
         email: "",
+        timestamp: serverTimestamp()
     })
 
-    const { name, email, password, } = formData
+    const { name, email, password, timestamp } = formData
 
 
     const { auth } = useUserAuth();
@@ -79,27 +79,30 @@ const SignUp = () => {
 
 
     console.log(formData);
-    return auth ?
+    return !auth.currentUser ?
         <>
             <Helmet>
-                <meta property="og:image" content="../assets/cover.jpg" />
-                <meta property="og:image:type" content="image/jpeg" />
+                <meta property="og:image:type" content="image/svg" />
+                <link rel="apple-touch-icon" href="/logo.svg" />
                 <meta name="description" content="Experience the thrill of anonymous communication with friends. Send and receive compliments without revealing your identity. Sign up now for a free and fun way to connect with your friends anonymously." />
             </Helmet>
             <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#DDC7F3]">
 
-                <div className="  text-white shadow-xl  items-center  p-5 rounded-lg  bg-[#7821CE]">
+                <div className="  text-white shadow-xl  items-center  p-5 rounded-lg    bg-[#7821CE]">
                     {/* <img className=" flex justify-center items-center w-[40%] m-auto" src="https://gdpd.xyz/kimages/logo-icon.png" alt="" /> */}
                     <h1 className=" text-3xl mt-10">Register</h1>
                     <p className=" text-xs">Recieve anonymous compliments from your friends and send anonymous messages to your friends for free.</p>
 
+                    <div className="text-[#fb01ff] font-medium text-center my-2 ">
+                        <p>Now it's your turn to create an account and dare your friends to tell you what they think about you</p>
+                    </div>
                     <form onSubmit={onSubmit} className=" my-5">
                         <div className="  my-5 items-start justify-start flex flex-col">
                             <label className=" mb-2" >Your UserName</label>
                             <input
-                                autocapitalize="off"
-                                autocorrect="off"
-                                maxlength="30"
+                                autoCapitalize="off"
+                                autoCorrect="off"
+                                maxLength="30"
                                 required={true}
                                 onChange={onChange}
                                 pattern="^\S{3,}$"
@@ -107,19 +110,19 @@ const SignUp = () => {
                                 value={name}
                                 className=" p-3 input focus:outline-none w-full bg-transparent border-b "
                                 type="text"
-                                onBlur={handlef} 
+                                onBlur={() => { setFocused(true) }}
                                 focused={focused.toString()}
                                 placeholder="Enter Your Username"
                             />
                             <p className=" text-xs mt-2 pre"> Ensure UserName does not contain spaces and has a minimum length of 3 characters</p>
                         </div>
-                        
+
 
                         <div className="  my-5 items-start justify-start flex flex-col">
                             <label className=" mb-2" >Your E-Mail</label>
                             <input
-                                autocapitalize="off"
-                                autocorrect="off"
+                                autoCapitalize="off"
+                                autoCorrect="off"
                                 required={true}
                                 onChange={onChange}
                                 value={email}
@@ -133,9 +136,9 @@ const SignUp = () => {
                         <div className="  my-5 items-start justify-start flex flex-col">
                             <label >Password</label>
                             <input
-                                autocapitalize="off"
-                                autocorrect="off"
-                                autocomplete="new-password"
+                                autoCapitalize="off"
+                                autoCorrect="off"
+                                autoComplete="new-password"
                                 required={true}
                                 onChange={onChange}
                                 value={password}

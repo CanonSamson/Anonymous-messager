@@ -22,8 +22,9 @@ const Home = () => {
 
 
         return (
-                <section className=" min-h-screen w-full px-5 flex justify-center items-center  bg-[#cc50cf]">
-                        <div onClick={() => { setLog(!log) }} className=" bg-[#7d247f] text-white p-2 absolute flex items-center rounded-full top-5 right-5">
+                <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#DDC7F3]">
+
+                        <div onClick={() => { setLog(!log) }} className="  bg-[#7821CE] text-white p-2 absolute flex items-center rounded-full top-5 right-5">
                                 <p className=" mr-2">Log Out</p>
                                 <MdOutlineLogout />
                         </div>
@@ -40,7 +41,7 @@ const Home = () => {
                                         </div>
                                 </div>
                         </div>
-                        <div className="  text-white shadow-xl    p-5 rounded-lg  bg-[#7d247f]">
+                        <div className="  text-white shadow-xl  items-center  p-5 rounded-lg  bg-[#7821CE]">
                                 <h1 className=" text-center my-2  text-3xl mt-10">{userDetail.name} Profile</h1>
                                 <p onClick={() => { setCopy(!copy) }} className="text-center text-xs mb-5">{link}</p>
                                 <p className=" text-xs text-center">Share your profile link ❤️ to get responses from your friend. Go to "View Messages" to check out the responses. 👌</p>

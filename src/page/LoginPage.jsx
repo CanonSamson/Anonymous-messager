@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -44,12 +44,12 @@ const LoginPage = () => {
       console.log(error.message)
 
       if (error.message === `Firebase: Error (auth/user-not-found).`) {
-        setErrorM("Sorry this user is not register")
+        setErrorM("Sorry This User Is Not Register")
 
       } 
 
       if (error.message === `Firebase: Error (auth/wrong-password).`) {
-        setErrorM('Your Password is ')
+        setErrorM('Your Password Is Wrong')
       }
 
       if (error.message === `Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).`) {
@@ -61,8 +61,8 @@ const LoginPage = () => {
   console.log(errorM)
 
 
-  return (
-    <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#DDC7F3]">
+  return !auth.currentUser ?
+  <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#DDC7F3]">
 
       <div className="  text-white shadow-xl  items-center  p-5 rounded-lg  bg-[#7821CE]">
         {/* <img className=" flex justify-center items-center w-[40%] m-auto" src="https://gdpd.xyz/kimages/logo-icon.png" alt="" /> */}
@@ -95,7 +95,7 @@ const LoginPage = () => {
               placeholder="Enter Your PassWord"
             />
           </div>
-          <div className=" border-b-red-400 border-b pb-2">
+          <div className=" pb-2">
           <p className=" ">{errorM}</p>
           </div>
           <div className=" flex flex-col items-center py-4">
@@ -108,7 +108,9 @@ const LoginPage = () => {
       </div>
 
     </section>
-  );
+:
+<Navigate to="/home" />
+
 }
 
 export default LoginPage;

@@ -26,7 +26,7 @@ function App() {
             <Route path='home' element={<Home />} />
             <Route path='mymessage/:id' element={<MyMessage />} />
           </Route>
-          <Route path='/:id' element={<Messsage />} />
+          <Route path='/:userName' element={<Messsage />} />
           <Route path='*' element={<NotFund />} />
 
         </Routes>

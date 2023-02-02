@@ -50,7 +50,7 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
             setUserD(user)
-            console.log(user)
+            // console.log(user)
             getUser();
 
             setPending(false)

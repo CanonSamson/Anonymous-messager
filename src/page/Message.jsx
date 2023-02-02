@@ -1,22 +1,24 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react'
-import { collection, doc, getDocs } from "firebase/firestore";
+import { collection, doc, getDocs, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase-config"
 import { getDoc, setDoc } from "firebase/firestore"
 
 
 const Messsage = ({ match }) => {
-    const { id } = useParams();
+    const { userName } = useParams();
 
     const navigate = useNavigate()
 
     const [message, setMessage] = useState({
         text: "",
         uid: id,
+        userName: userName,
+        timestamp: serverTimestamp()
     })
 
-    const { text } = message;
+    const { text, timestamp } = message;
 
     const onChange = (e) => {
         setMessage((prevState) => ({
@@ -27,13 +29,14 @@ const Messsage = ({ match }) => {
     }
 
 
+
     const onSubmit = async (e) => {
         e.preventDefault()
 
         try {
 
             await setDoc(doc(db, "messages", crypto.randomUUID()), message);
-            navigate("/")
+            navigate("/home")
         } catch (e) {
             console.error("Error adding document: ", e);
         }
@@ -41,12 +44,12 @@ const Messsage = ({ match }) => {
     }
 
     useEffect(() => {
-    
+        getUser()
     }, []);
     return (
-        <section className="  p-5 min-h-screen justify-center flex items-center  bg-[#cc50cf]">
+        <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#DDC7F3]">
 
-            <div className="  text-white shadow-xl  items-center  p-5 rounded-lg  bg-[#7d247f]">
+            <div className="  text-white shadow-xl  items-center  p-5 rounded-lg  bg-[#7821CE]">
                 <h1 className=" text-3xl mt-10 text-center">Say Something..</h1>
 
                 <form onSubmit={onSubmit} className=" my-5">
@@ -58,7 +61,7 @@ const Messsage = ({ match }) => {
                             type="text"
                             value={text}
                             id="text"
-                        placeholder={`Leave a message for  ${id}`}
+                            placeholder={`Leave a message for  ${id}`}
                         />
                         <div className=" my-3 border-b border-gray-100/50 w-full py-2 mt-10">
                             <p className=" text-gray-100/50">254 characters remaining</p>
