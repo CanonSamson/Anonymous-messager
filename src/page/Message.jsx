@@ -7,14 +7,13 @@ import { getDoc, setDoc } from "firebase/firestore"
 
 
 const Messsage = ({ match }) => {
-    const { userName } = useParams();
+    const { id} = useParams();
 
     const navigate = useNavigate()
 
     const [message, setMessage] = useState({
         text: "",
-        uid: id,
-        userName: userName,
+        userName: id,
         timestamp: serverTimestamp()
     })
 
@@ -44,7 +43,7 @@ const Messsage = ({ match }) => {
     }
 
     useEffect(() => {
-        getUser()
+
     }, []);
     return (
         <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#DDC7F3]">
@@ -57,7 +56,7 @@ const Messsage = ({ match }) => {
                         <label className=" mb-2" >Say Something About Me <span className=" text-red-600">*</span></label>
                         <input
                             onChange={onChange}
-                            className=" p-3 focus:outline-none w-full  bg-[#5d185e] rounded-lg"
+                            className=" p-3 focus:outline-none w-full  bg-[#8228db] rounded-lg"
                             type="text"
                             value={text}
                             id="text"

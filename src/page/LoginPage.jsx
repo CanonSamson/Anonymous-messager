@@ -92,7 +92,7 @@ const LoginPage = () => {
               onChange={onChange}
               id="password"
               value={password}
-              placeholder="Enter Your PassWord"
+              placeholder="Enter Your Password"
             />
           </div>
           <div className=" pb-2">

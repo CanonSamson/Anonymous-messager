@@ -145,7 +145,7 @@ const SignUp = () => {
                                 id="password"
                                 className=" p-3 w-full bg-transparent focus:outline-none border-b "
                                 type="password"
-                                placeholder="Enter Your PassWord"
+                                placeholder="Enter Your Password"
                             />
                         </div>
                         <p className=" ">{errorM}</p>
