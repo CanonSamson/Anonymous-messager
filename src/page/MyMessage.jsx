@@ -21,7 +21,7 @@ const MyMessage = ({ match }) => {
             const messageD = await getDocs(collection(db, "messages"))
             const messageData = (messageD.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
             const MData = messageData.filter(user => user.userName === userCurrentData.name);
-            // console.log(MData)
+    
             setMessage(MData)
 
         } catch (err) {
