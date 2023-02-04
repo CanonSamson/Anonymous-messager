@@ -7,7 +7,7 @@ import { getDoc, setDoc } from "firebase/firestore"
 
 
 const Messsage = ({ match }) => {
-    const { id} = useParams();
+    const { id } = useParams();
 
     const navigate = useNavigate()
 
@@ -55,6 +55,7 @@ const Messsage = ({ match }) => {
                     <div className="  my-5 items-start justify-start flex flex-col">
                         <label className=" mb-2" >Say Something About Me <span className=" text-red-600">*</span></label>
                         <input
+                            required={true}
                             onChange={onChange}
                             className=" p-3 focus:outline-none w-full  bg-[#8228db] rounded-lg"
                             type="text"
