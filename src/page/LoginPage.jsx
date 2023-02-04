@@ -107,6 +107,7 @@ const LoginPage = () => {
           <div className=" pb-2">
             <p className=" ">{errorM}</p>
           </div>
+          
           <div className=" flex flex-col items-center py-4">
             <button className=" bg-[#fb01ff] w-full  p-3 rounded-lg shadow-lg active:scale-105"> {submit ? <p className="w-5 m flex justify-center items-center m-auto border-4 border-dotted border-white border-r-0 animate-spin duration-150 transition-all  relative h-5 rounded-full"></p> : `Login`} </button>
             <Link className=" text-[#ef95f1] my-3" to=""> Forgot Password</Link>
