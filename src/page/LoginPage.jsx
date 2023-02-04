@@ -82,7 +82,7 @@ const LoginPage = () => {
               value={email}
               id="email"
               onChange={onChange}
-              placeholder="Enter Your Username"
+              placeholder="Enter Your Email"
             />
           </div>
 
