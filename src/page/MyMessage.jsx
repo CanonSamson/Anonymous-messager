@@ -56,7 +56,7 @@ const MyMessage = ({ match }) => {
                             :
 
                             message.map((item) => (
-                                <div key={item.id} className=" bg-[#47137c] border my-2  rounded-lg p-5">
+                                <div key={item.id} className=" bg-[#47137c] border-dotted border border-[#fb01ff]  shadow-lg my-2  rounded-lg p-5">
                                     <p className=" my-2">{item.text}</p>
                                     {item.timestamp &&
                                         <p className=" mt-10">

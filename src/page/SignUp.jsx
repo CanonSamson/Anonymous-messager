@@ -141,7 +141,7 @@ const SignUp = () => {
                                 id="email"
                                 className=" p-3 focus:outline-none w-full rounded shadow-lg bg-[#6115ac] focus:border-2 border-dotted border-[#a259eb] "
                                 type="text"
-                                placeholder="Enter Your Email here"
+                                placeholder="Enter Your Email"
                             />
                         </div>
 
