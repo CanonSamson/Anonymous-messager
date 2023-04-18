@@ -9,6 +9,7 @@ import MyMessage from './page/MyMessage'
 import { AuthProvider } from './Auth'
 import NotFund from './page/NotFund'
 import ScrollToTop from './ScrollToTop'
+import LandingPage from './page/LandingPage'
 
 
 function App() {
@@ -20,11 +21,12 @@ function App() {
       <AuthProvider>
         <ScrollToTop />
         <Routes>
-          <Route path='/' element={<LoginPage />} />
+          <Route path='/' element={<LandingPage />} />
+          <Route path='/login' element={<LoginPage />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/' element={<PrivateRoute />}  >
             <Route path='home' element={<Home />} />
-            <Route path='mymessage/:id' element={<MyMessage />} />
+            <Route path='/m/:id' element={<MyMessage />} />
           </Route>
           <Route path='/:id' element={<Messsage />} />
           <Route path='*' element={<NotFund />} />

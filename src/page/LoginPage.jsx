@@ -1,40 +1,29 @@
 import { useState } from "react";
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+
 
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
 
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useUserAuth } from "../Auth";
+import InputField from "../components/InputField";
+import { MdClose } from "react-icons/md";
+import { useFormik } from "formik";
+import { LoginSchema } from "../validation/login";
 
-const LoginPage = () => {
+const LoginPage = ({ onClick, onClickR }) => {
 
   const [submit, setSubmit] = useState(false)
   const [errorM, setErrorM] = useState('')
-  const [showPassword, setShowPassword] = useState(true)
 
   const navigate = useNavigate()
 
-
-  const [formData, setformData] = useState({
-    email: "",
-    password: ""
-  })
-
-  const { email, password } = formData
-  const onChange = (e) => {
-    setformData((prevState) => ({
-      ...prevState,
-      [e.target.id]: e.target.value
-    }))
-  }
-
   const { auth } = useUserAuth();
 
-  const onSubmit = async (e) => {
+  const onSubmit = async () => {
     setSubmit(!submit)
-    e.preventDefault()
+
+    const { email, password } = values;
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password)
@@ -63,61 +52,65 @@ const LoginPage = () => {
   }
   console.log(errorM)
 
+  const { errors, touched, handleChange, handleBlur, values, handleSubmit } = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+
+    },
+    validationSchema: LoginSchema,
+    onSubmit
+
+  })
+
+
 
   return !auth.currentUser ?
-    <section className=" p-5 min-h-screen justify-center flex items-center  bg-[#DDC7F3]">
 
-      <div className="  text-white shadow-xl  items-center  p-5 rounded-lg  bg-[#7821CE]">
-        {/* <img className=" flex justify-center items-center w-[40%] m-auto" src="https://gdpd.xyz/kimages/logo-icon.png" alt="" /> */}
-        <h1 className=" text-3xl mt-10">Login</h1>
-        <p className=" text-xs">Recieve anonymous compliments from your friends and send anonymous messages to your friends for free.</p>
+    <div className=" relative  text-black text-[11px] shadow-xl  items-center  px-5 rounded-lg  bg-white max-w-[400px]">
+      < MdClose onClick={onClick} className=" absolute top-[-10px] p-2 right-[-10px] rounded-full text-white bg-red-500 font-semibold" size={30} />
 
-        <form onSubmit={onSubmit} className=" my-5">
-          <div className="  my-5 items-start justify-start flex flex-col">
-            <label className=" mb-2" >Your Email</label>
-            <input
-              required={true}
-              className=" p-3 focus:outline-none w-full rounded shadow-lg bg-[#6115ac] focus:border-2 border-dotted border-[#a259eb] "
-              type="text"
-              value={email}
-              id="email"
-              onChange={onChange}
-              placeholder="Enter Your Email"
-            />
-          </div>
+      <h1 className=" text-3xl mt-8">LOG IN</h1>
+      <p >Recieve anonymous compliments from your friends and send anonymous messages to your friends for free.</p>
 
-          <div className="  my-5 items-start justify-start flex flex-col">
-            <label >Password</label>
-            <div className=" flex items-center justify-between  bg-[#6115ac] rounded  border-2 border-dotted border-[#a259eb] shadow-lg w-full pr-5 ">
-              <input
-                autoCapitalize="off"
-                autoCorrect="off"
-                autoComplete="new-password"
-                required={true}
-                onChange={onChange}
-                value={password}
-                id="password"
-                className=" p-3 flex-1   w-full bg-[#6115ac]  focus:outline-none "
-                type={showPassword ? "password" : "text"}
-                placeholder="Enter Your Password" />
-              {showPassword ? <div className=" text-[#B8B8B8]" onClick={() => setShowPassword(!showPassword)}><VisibilityOffIcon /> </div> :
-                <div className=" text-[#B8B8B8]" onClick={() => setShowPassword(!showPassword)}><VisibilityIcon /> </div>}
-            </div>
-          </div>
-          <div className=" pb-2">
-            <p className=" ">{errorM}</p>
-          </div>
-          
-          <div className=" flex flex-col items-center py-4">
-            <button className=" bg-[#fb01ff] w-full  p-3 rounded-lg shadow-lg active:scale-105"> {submit ? <p className="w-5 m flex justify-center items-center m-auto border-4 border-dotted border-white border-r-0 animate-spin duration-150 transition-all  relative h-5 rounded-full"></p> : `Login`} </button>
-            <Link className=" text-[#ef95f1] my-3" to=""> Forgot Password</Link>
-            <Link to="/signup">Don't Have an Account? Register</Link>
-          </div>
-        </form>
+      <form onSubmit={handleSubmit} className=" my-5">
+        <div className="  my-2 items-start justify-start flex flex-col">
+          <InputField
+            label="Email"
+            id="email"
+            required={true}
+            type="text"
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            placeholder="Email"
+          />
+        </div>
 
-      </div>
+        <div className="  my-2 items-start justify-start flex flex-col">
+          <InputField
+            label="Password"
+            id="password"
+            required={true}
+            type="password"
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            placeholder="Password"
+          />
+        </div>
+        <div>
+          <small className="  text-[10px] text-red-600">{errorM && errorM}</small>
+        </div>
 
-    </section>
+        <div className=" flex flex-col  py-2">
+          <button className=" bg-blue-600 text-[14px] text-white w-full  p-3 rounded shadow-lg active:scale-105"> {submit ? <p className="w-5 m flex justify-center items-center m-auto border-4 border-dotted border-white border-r-0 animate-spin duration-150 transition-all  relative h-5 rounded-full"></p> : `Login`} </button>
+          <Link className=" text-end my-3" to=""> Forgot Password</Link>
+          <p className=" hover:cursor-pointer">   Don't Have an Account? <small onClick={onClickR} className=" text-blue-600" to="/signup"> Register</small></p>
+        </div>
+      </form>
+
+    </div>
     :
     <Navigate to="/home" />
 

@@ -1,10 +1,10 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "@firebase/firestore"
 import { getStorage } from "firebase/storage"
-// import FIREBASE_API_KEY  from "./.env"
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDjR-dXmSPGAoepyaUbRo7TqxGSke3BAs4",
+    apiKey:  import.meta.env.VITE_KEY_FIREBASE // "AIzaSyDjR-dXmSPGAoepyaUbRo7TqxGSke3BAs4" 
+    ,
     authDomain: "anonymous-message-ac18a.firebaseapp.com",
     projectId: "anonymous-message-ac18a",
     storageBucket: "anonymous-message-ac18a.appspot.com",

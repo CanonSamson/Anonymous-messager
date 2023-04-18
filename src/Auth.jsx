@@ -50,9 +50,7 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
             setUserD(user)
-            // console.log(user)
             getUser();
-
             setPending(false)
         });
 
@@ -62,8 +60,8 @@ export function AuthProvider({ children }) {
 
     if (pending) {
         return (
-            <div className=" w-full h-screen fixed right-0 flex justify-center items-center">
-                <p className=" relative w-5 h-5 rounded-full border-r-[2px] border-rl-[2px]  border-green m-auto animate-spin  "></p>
+            <div className=" w-full bg-blue-600 h-screen fixed right-0 flex justify-center items-center">
+                <p className=" relative w-7 h-7 rounded-full border-2 border-dashed border-white m-auto animate-spin  "></p>
             </div>
         )
     }
