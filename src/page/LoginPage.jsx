@@ -9,7 +9,7 @@ import { useUserAuth } from "../Auth";
 import InputField from "../components/InputField";
 import { MdClose } from "react-icons/md";
 import { useFormik } from "formik";
-import { LoginSchema } from "../validation/login";
+import { LoginSchema } from "../validation/formValidation";
 
 const LoginPage = ({ onClick, onClickR }) => {
 

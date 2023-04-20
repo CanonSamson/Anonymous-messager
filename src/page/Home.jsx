@@ -7,7 +7,7 @@ import { MdOutlineLogout } from "react-icons/md";
 
 const Home = () => {
         const { userDetail, logout } = useUserAuth();
-        const [copy, setCopy] = useState(false);
+        const [isCopied, setIsCopied] = useState(false);
         const [log, setLog] = useState(false);
 
 
@@ -15,8 +15,8 @@ const Home = () => {
         const linkText = `Write a *secret anonymous message* for me.. 😉 I *won't know* who wrote it.. 😂❤ 👉 ${link}`
         const handleCopy = () => {
                 navigator.clipboard.writeText(linkText);
-                setCopy(!copy)
-                alert(Copied)
+                setIsCopied(true);
+                alert("Copied");
         };
 
         return (
@@ -27,7 +27,10 @@ const Home = () => {
                                 <MdOutlineLogout />
                         </div>
 
-                        <div className={` ${log ? " top-0 right-0 w-full h-screen transition-all duration-150" : " overflow-hidden w-[0px] h-[0px] transition-all duration-150 "}  bg-[#7d247f]/50 text-white   fixed  flex justify-center items-center`}>
+                        <div className={` ${log ? " top-0 right-0 w-full h-screen transition-all duration-150"
+                                :
+                                " overflow-hidden w-[0px] h-[0px] transition-all duration-150 "} 
+                         bg-[#7d247f]/50 text-white   fixed  flex justify-center items-center`}>
                                 <div className="  p-5 m-5 rounded-lg bg-white max-w-[300px]">
                                         <p className="text-red-600">Are you sure you want To Log Out?  You can't undo this action.</p>
 
@@ -40,8 +43,8 @@ const Home = () => {
                                 </div>
                         </div>
                         <div className="  text-black shadow-xl  items-center  p-5 rounded-lg  bg-white max-w-[400px] ">
-                                <h1 className=" text-center my-2  text-3xl mt-10">{userDetail.name} Profile</h1>
-                                <p onClick={() => { setCopy(!copy) }} className="text-center text-xs mb-2">{link}</p>
+                                <h1 className=" text-center pt-2   text-3xl mt-10 font-Casper uppercase mb-2">{userDetail.name} Profile</h1>
+                                <p className="text-center w-auto mb-3  bg-blue-100 rounded py-[1px] hover:cursor-pointer text-blue-500">{link}</p>
                                 <p className=" text-xs text-center">Share your profile link ❤️ to get responses from your friend. Go to "View Messages" to check out the responses. 👌</p>
 
                                 <div className=" border-t  grid grid-cols-1 gap-3 mt-3">

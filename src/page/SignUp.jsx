@@ -9,7 +9,7 @@ import { useUserAuth } from "../Auth";
 import InputField from "../components/InputField";
 import { MdClose } from "react-icons/md";
 import { useFormik } from "formik";
-import { SignupSchema } from "../validation/signup";
+import { SignupSchema } from "../validation/formValidation";
 
 
 const SignUp = ({ onClick, onClickL }) => {
@@ -144,8 +144,8 @@ const SignUp = ({ onClick, onClickL }) => {
                     <button type="submit"
                         className=" bg-blue-600 text-white text-[14px] w-full  p-2 rounded 
                      shadow-lg active:scale-105"> {submit ?
-                            <p className="w-5 border-4 border-dotted m-auto flex justify-center 
-                            items-center border-white border-r-0 animate-spin duration-150 transition-all  relative h-5 rounded-full"></p>
+                            <p className="w-5 h-5 border-[4px] border-dotted m-auto flex justify-center 
+                            items-center border-white  animate-spin duration-150 transition-all  relative  rounded-full"></p>
                             : `Register`} </button>
                     <div className=" mt-2 pb-5">
                         <p className=" hover:cursor-pointer"> Already Have an Account?<small onClick={onClickL} className=" text-blue-600" > Login</small></p>
