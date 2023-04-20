@@ -53,8 +53,10 @@ const Messsage = ({ match }) => {
 
     })
     useEffect(() => {
-        if (auth.currentUser.displayName === id) {
+        if (auth.currentUser && auth.currentUser.displayName === id) {
             navigate("/home")
+        }else {
+            
         }
 
         const CurrentUser = users.filter(user => user.name === id)
@@ -62,7 +64,7 @@ const Messsage = ({ match }) => {
     }, [id]);
 
 
-    return idHandle ?
+    return idHandle && idHandle ?
         <section className=" p-5 min-h-screen justify-center flex items-center  bg-blue-600 text-[11px]">
 
             <div className="  text-black shadow-xl  items-center p-3 py-10 rounded-lg  bg-white max-w-[400px]">
@@ -105,7 +107,7 @@ const Messsage = ({ match }) => {
 
         </section>
         :
-        <Navigate to="/" />
+        <Navigate to="/home" />
 }
 
 export default Messsage;

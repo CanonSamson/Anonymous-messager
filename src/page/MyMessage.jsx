@@ -3,13 +3,13 @@ import { db } from "../firebase-config"
 import { collection, getDocs } from "firebase/firestore"
 import { useUserAuth } from "../Auth";
 import { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link,  useNavigate, useParams } from "react-router-dom";
 
 const MyMessage = ({ match }) => {
     const [idHandle, setIdHandle] = useState('')
     const { id } = useParams();
     const [message, setMessage] = useState([])
-    const { userDetail, auth, users } = useUserAuth();
+    const {  auth, users } = useUserAuth();
 
     const navigate = useNavigate()
 
