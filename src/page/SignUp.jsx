@@ -115,7 +115,7 @@ const SignUp = ({ onClick, onClickL }) => {
                     <InputField
                         label=" Email"
                         id="email"
-                        type="text"
+                        type="email"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.email}

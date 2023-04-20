@@ -11,7 +11,7 @@ import { useUserAuth } from "../Auth";
 const Messsage = ({ match }) => {
     const [idHandle, setIdHandle] = useState([])
 
-    const { users } = useUserAuth()
+    const { auth, users } = useUserAuth()
     const { id } = useParams();
 
     const navigate = useNavigate()
@@ -46,8 +46,12 @@ const Messsage = ({ match }) => {
     }
 
     useEffect(() => {
-        const Cuser = users.filter(user => user.name === id)
-        setIdHandle(Cuser[0])
+        if (auth.currentUser.displayName === id) {
+            navigate("/home")
+        }
+
+        const CurrentUser = users.filter(user => user.name === id)
+        setIdHandle(CurrentUser[0])
     }, [id]);
 
 

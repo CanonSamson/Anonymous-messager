@@ -3,12 +3,15 @@ import { db } from "../firebase-config"
 import { collection, getDocs } from "firebase/firestore"
 import { useUserAuth } from "../Auth";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 
 const MyMessage = ({ match }) => {
+    const [idHandle, setIdHandle] = useState('')
     const { id } = useParams();
     const [message, setMessage] = useState([])
-    const { userDetail, auth , users} = useUserAuth();
+    const { userDetail, auth, users } = useUserAuth();
+
+    const navigate = useNavigate()
 
     async function getMessages() {
         let uid = auth.currentUser.uid
@@ -16,7 +19,6 @@ const MyMessage = ({ match }) => {
         try {
 
             const userCurrentData = users.find(user => user.id === id)
-
             const messageD = await getDocs(collection(db, "messages"))
             const messageData = (messageD.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
             const MData = messageData.filter(user => user.userName === userCurrentData.name);
@@ -30,10 +32,12 @@ const MyMessage = ({ match }) => {
 
 
     useEffect(() => {
+        auth.currentUser.uid === id ? setIdHandle(id) : navigate("/home")
         getMessages()
+    }, []);
 
-    }, [])
-    return (
+
+    return idHandle &&
         <section className=" p-5 min-h-screen justify-center flex items-center  bg-blue-600 text-[11px]">
 
             <div className="  text-black max-w-[400px] shadow-xl  items-center p-3 rounded py-10  bg-white">
@@ -77,7 +81,7 @@ const MyMessage = ({ match }) => {
             </div>
 
         </section>
-    );
+
 }
 
 export default MyMessage;
