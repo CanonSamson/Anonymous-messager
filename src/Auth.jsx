@@ -19,6 +19,7 @@ export function AuthProvider({ children }) {
     const navigate = useNavigate()
     const [pending, setPending] = useState(true)
     const [userDetail, setUserDetail] = useState([])
+    const [users, setUsers] = useState([])
 
     const [userD, setUserD] = useState(null)
 
@@ -26,14 +27,12 @@ export function AuthProvider({ children }) {
 
 
     async function getUser() {
-        let uid = auth.currentUser.uid
-
         try {
+            let uid =  auth && auth.currentUser.uid
             const data = await getDocs(collection(db, "users"))
             const user = (data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
             const userCurrentData = user.find(user => user.id === uid);
             setUserDetail(userCurrentData)
-            // console.log(userCurrentData)
 
         } catch (err) {
             console.log(err)
@@ -45,16 +44,23 @@ export function AuthProvider({ children }) {
         navigate("/")
     }
 
-
-
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
             setUserD(user)
             getUser();
-            setPending(false)
         });
+        const getUserLink = async () => {
+            try {
+                const data = await getDocs(collection(db, "users"))
+                const users = (data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+                setUsers(users)
+                setPending(false)
+            } catch (errors) {
+                console.error("Error adding document: ", errors);
+            }
 
-
+        }
+        getUserLink()
     }, []);
 
 
@@ -67,6 +73,7 @@ export function AuthProvider({ children }) {
     }
 
     const value = {
+        users,
         auth,
         userDetail,
         userD,
