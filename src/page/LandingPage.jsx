@@ -8,9 +8,9 @@ import { Navigate } from "react-router-dom";
 const LandingPage = () => {
     const [loginPop, setLoginPop] = useState(false)
     const [signPop, setsignPop] = useState(false)
-    const { userDetail} = useUserAuth();
+    const { auth, userDetail } = useUserAuth();
 
-    return !userDetail ?
+    return !auth.currentUser ?
         <div>
             <div className=" gap-5 grid sm:grid-cols-2 justify-around  min-h-screen w-full items-center sm:px-10 px-3">
                 <div className=" flex flex-col gap-2 w-full ">
@@ -61,8 +61,8 @@ const LandingPage = () => {
                 }
             </div>
         </div>
-    :
-    <Navigate to="/home" />
+        :
+        <Navigate to="/home" />
 }
 
 export default LandingPage;
